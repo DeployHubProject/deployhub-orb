@@ -83,7 +83,7 @@ commands:
             << parameters.comptype >>
             --compattr "GitCommit:<< parameters.gitcommit >>" 
             --compattr "GitUrl:<< parameters.giturl >>" 
-            --compattr "GitRepo:<< parameters.getrepo >>" 
+            --compattr "GitRepo:<< parameters.gitrepo >>" 
             --compattr "Chart:<< parameters.helmchart >>"
             --compattr "DockerSha:<< parameters.dockersha >>"
             --compattr "DockerBuildDate:<< parameters.builddate >>"
@@ -342,7 +342,22 @@ jobs:
         type: string    
       builddate:
         description: "Build Date"
-        type: string 
+        type: string
+      gitrepo:
+        description: "Git Repo Name"
+        type: string
+      giturl:
+        description: "Git Url"
+        type: string
+      gitcommit:
+        description: "Git Commit"
+        type: string
+      buildid:
+        description: "Build Url"
+        type: string
+      buildnumber:
+        description: "Build Number"
+        type: string          
     executor: default         
     steps:
       - compupdate:
