@@ -55,7 +55,7 @@ commands:
         type: string                              
     steps:
       - run:
-        name: Approve application version
+        name: Update Component
         command: >
           compupdate
           --dhuser $<< parameters.dhuser >>
