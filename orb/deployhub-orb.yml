@@ -52,7 +52,22 @@ commands:
         type: string    
       builddate:
         description: "Build Date"
-        type: string                              
+        type: string
+      gitrepo:
+        description: "Git Repo Name"
+        type: string
+      giturl:
+        description: "Git Url"
+        type: string
+      gitcommit:
+        description: "Git Commit"
+        type: string
+      buildid:
+        description: "Build Url"
+        type: string
+      buildnumber:
+        description: "Build Number"
+        type: string                                      
     steps:
       - run:
           name: Update Component
