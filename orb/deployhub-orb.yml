@@ -334,7 +334,7 @@ jobs:
           dhuser: << parameters.dhuser >>
           dhpass: << parameters.dhpass >>
           dhurl: << parameters.dhurl >>
-          appname: << parameters.application >>
+          application: << parameters.application >>
           appversion: << parameters.appversion >>
           compname: << parameters.compname >>
           compversion: << parameters.compversion >>
