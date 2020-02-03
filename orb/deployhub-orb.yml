@@ -66,15 +66,15 @@ commands:
             --compname "<< parameters.compname >>"
             --compversion "<< parameters.compversion >>"
             << parameters.comptype >>
-            --compattr "GitCommit:<< pipeline.git.revision >>" 
-            --compattr "GitUrl:<< pipeline.project.git_url >>" 
-            --compattr "GitRepo:<< pipeline.project.git_url >>" 
+            --compattr "GitCommit:<< parameters.gitcommit >>" 
+            --compattr "GitUrl:<< parameters.giturl >>" 
+            --compattr "GitRepo:<< parameters.getrepo >>" 
             --compattr "Chart:<< parameters.helmchart >>"
             --compattr "DockerSha:<< parameters.dockersha >>"
             --compattr "DockerBuildDate:<< parameters.builddate >>"
             --compattr "DockerRepo:<< parameters.dockerrepo >>"
-            --compattr "BuildId:<< pipeline.id >>"
-            --compattr "BuildNumber:<< pipeline.number >>"
+            --compattr "BuildId:<< parameters.buildid >>"
+            --compattr "BuildNumber:<< parameters.buildnumber >>"
 
   approve:
     description: "Approves an Application for the current stage of the pipeline"
@@ -342,4 +342,9 @@ jobs:
           helmchart: << parameters.helmchart >>
           dockersha: << parameters.dockersha >>
           builddate: << parameters.builddate >>
-          dockerrepo: << parameters.dockerrepo >>  
+          dockerrepo: << parameters.dockerrepo >>
+          giturl: << parameters.giturl >>
+          gitrepo: << parameters.gitrepo >>
+          gitcommit: << parameters.gitcommit >>
+          buildid: << parameters.buildid >>
+          buildnumber: << parameters.buildnumber >>  
