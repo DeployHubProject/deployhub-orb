@@ -55,26 +55,26 @@ commands:
         type: string                              
     steps:
       - run:
-        name: Update Component
-        command: >
-          compupdate
-          --dhuser $<< parameters.dhuser >>
-          --dhpass $<< parameters.dhpass >>
-          --dhurl $<< parameters.dhurl >>
-          --appname "<< parameters.application >>"
-          --appversion "<< parameters.appversion >>"
-          --compname "<< parameters.compname >>"
-          --compversion "<< parameters.compversion >>"
-          << parameters.comptype >>
-          --compattr "GitCommit:<< pipeline.git.revision >>" 
-          --compattr "GitUrl:<< pipeline.project.git_url >>" 
-          --compattr "GitRepo:<< pipeline.project.git_url >>" 
-          --compattr "Chart:<< parameters.helmchart >>"
-          --compattr "DockerSha:<< parameters.dockersha >>"
-          --compattr "DockerBuildDate:<< parameters.builddate >>"
-          --compattr "DockerRepo:<< parameters.dockerrepo >>"
-          --compattr "BuildId:<< pipeline.id >>"
-          --compattr "BuildNumber:<< pipeline.number >>"
+          name: Update Component
+          command: >
+            compupdate
+            --dhuser $<< parameters.dhuser >>
+            --dhpass $<< parameters.dhpass >>
+            --dhurl $<< parameters.dhurl >>
+            --appname "<< parameters.application >>"
+            --appversion "<< parameters.appversion >>"
+            --compname "<< parameters.compname >>"
+            --compversion "<< parameters.compversion >>"
+            << parameters.comptype >>
+            --compattr "GitCommit:<< pipeline.git.revision >>" 
+            --compattr "GitUrl:<< pipeline.project.git_url >>" 
+            --compattr "GitRepo:<< pipeline.project.git_url >>" 
+            --compattr "Chart:<< parameters.helmchart >>"
+            --compattr "DockerSha:<< parameters.dockersha >>"
+            --compattr "DockerBuildDate:<< parameters.builddate >>"
+            --compattr "DockerRepo:<< parameters.dockerrepo >>"
+            --compattr "BuildId:<< pipeline.id >>"
+            --compattr "BuildNumber:<< pipeline.number >>"
 
   approve:
     description: "Approves an Application for the current stage of the pipeline"
