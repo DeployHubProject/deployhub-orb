@@ -72,7 +72,7 @@ commands:
       - run:
           name: Update Component
           command: >
-            dh  
+            /usr/local/bin/dh  
             compupdate
             --dhuser $<< parameters.dhuser >>
             --dhpass $<< parameters.dhpass >>
@@ -118,7 +118,7 @@ commands:
       - run:
           name: Approve application version
           command: >
-            dh
+            /usr/local/bin/dh 
             approve
             --dhuser $<< parameters.dhuser >>
             --dhpass $<< parameters.dhpass >>
@@ -158,7 +158,7 @@ commands:
     - run:
         name: Move application along DeployHub pipeline
         command: >
-          dh
+          /usr/local/bin/dh
           move
           --dhuser $<< parameters.dhuser >>
           --dhpass $<< parameters.dhpass >>
@@ -197,7 +197,7 @@ commands:
     - run:
         name: Deploy application
         command: >
-          dh
+          /usr/local/bin/dh
           deploy
           --dhuser $<< parameters.dhuser >>
           --dhpass $<< parameters.dhpass >>
