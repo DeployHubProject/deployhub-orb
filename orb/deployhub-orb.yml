@@ -67,10 +67,10 @@ commands:
           name: Update Component
           command: >
             docker run quay.io/deployhub/compupdate:latest 
-            compupdate
-            --dhuser $<< parameters.dhuser >>
-            --dhpass $<< parameters.dhpass >>
-            --dhurl $<< parameters.dhurl >>
+            updatecomp
+            --dhuser "$<< parameters.dhuser >>"
+            --dhpass "$<< parameters.dhpass >>"
+            --dhurl "$<< parameters.dhurl >>"
             --appname "<< parameters.application >>"
             --appversion "<< parameters.appversion >>"
             --compname "<< parameters.compname >>"
@@ -114,9 +114,9 @@ commands:
           command: >
             docker run quay.io/deployhub/compupdate:latest  
             approve
-            --dhuser $<< parameters.dhuser >>
-            --dhpass $<< parameters.dhpass >>
-            --dhurl $<< parameters.dhurl >>
+            --dhuser "$<< parameters.dhuser >>"
+            --dhpass "$<< parameters.dhpass >>"
+            --dhurl "$<< parameters.dhurl >>"
             --appname "<< parameters.application >>"
             --appversion "<< parameters.appversion >>"
 
@@ -154,9 +154,9 @@ commands:
         command: >
           docker run quay.io/deployhub/compupdate:latest 
           move
-          --dhuser $<< parameters.dhuser >>
-          --dhpass $<< parameters.dhpass >>
-          --dhurl $<< parameters.dhurl >>
+          --dhuser "$<< parameters.dhuser >>"
+          --dhpass "$<< parameters.dhpass >>"
+          --dhurl "$<< parameters.dhurl >>"
           --appname "<< parameters.application >>"
           --appversion "<< parameters.appversion >>"
           --from_domain "<< parameters.from_domain >>"
@@ -193,9 +193,9 @@ commands:
         command: >
           docker run quay.io/deployhub/compupdate:latest 
           deploy
-          --dhuser $<< parameters.dhuser >>
-          --dhpass $<< parameters.dhpass >>
-          --dhurl $<< parameters.dhurl >>
+          --dhuser "$<< parameters.dhuser >>"
+          --dhpass "$<< parameters.dhpass >>"
+          --dhurl "$<< parameters.dhurl >>"
           --appname "<< parameters.application >>"
           --appversion "<< parameters.appversion >>"          
           --env "<< parameters.environment >>"
