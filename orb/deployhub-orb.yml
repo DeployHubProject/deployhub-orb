@@ -205,7 +205,62 @@ commands:
           --appname "<< parameters.application >>"
           --appversion "<< parameters.appversion >>"          
           --env "<< parameters.environment >>"
+  deploy:
+    description: "Deploys an Application Version to an Environment"
+    parameters:
+      dhuser:
+        description: "Name of env var storing UserId to access DeployHub"
+        type: env_var_name
+        default: DH_USERID
+      dhpass:
+        description: "Name of env var storing dhpass to access DeployHub"
+        type: env_var_name
+        default: DH_PASSWORD
+      dhurl:
+        description: "Name of env var storing URL to the DeployHub Server"
+        type: env_var_name
+        default: DH_SERVERURL
+      application:
+        description: "Application Name to Deploy"
+        type: string
+      appversion:
+          description: "Application Version to Deploy"
+          type: string    
+      environment:
+        description: "Environment to Deploy to"
+        type: string             
 
+    steps:
+    - run:
+        name: Deploy application
+        command: >
+          docker run quay.io/deployhub/compupdate:latest 
+          deploy
+          --dhuser "$<< parameters.dhuser >>"
+          --dhpass "$<< parameters.dhpass >>"
+          --dhurl "$<< parameters.dhurl >>"
+          --appname "<< parameters.application >>"
+          --appversion "<< parameters.appversion >>"          
+          --env "<< parameters.environment >>"
+
+  envscript:
+    description: "Generate the environment variable script from the TOML file"
+    parameters:
+      envvars:
+        description: "Name of the input environment TOML file"
+        type: string
+      envvars_sh:
+        description: "Name of output shell script name"
+        type: string
+    steps:
+    - run:
+        name: Create env script
+        command: >
+          docker run quay.io/deployhub/compupdate:latest 
+          envscript
+          --envvars "$<< parameters.envvars >>"
+          --envvars_sh "$<< parameters.envvars_sh >>"         
+          
 jobs:
   approvejob:
     description: "Approve an Application Version"
@@ -381,4 +436,18 @@ jobs:
           gitrepo: << parameters.gitrepo >>
           gitcommit: << parameters.gitcommit >>
           buildid: << parameters.buildid >>
-          buildnumber: << parameters.buildnumber >>  
+          buildnumber: << parameters.buildnumber >> 
+  envscriptjob:
+    description: "Generate the environment variable script from the TOML file"
+    parameters:
+      envvars:
+        description: "Name of the input environment TOML file"
+        type: string
+      envvars_sh:
+        description: "Name of output shell script name"
+        type: string  
+    executor: default
+    steps:
+      - envscript:
+          envvars: "$<< parameters.envvars >>"
+          envvars_sh: "$<< parameters.envvars_sh >>"  
