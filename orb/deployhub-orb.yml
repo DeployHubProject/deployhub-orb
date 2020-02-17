@@ -4,8 +4,6 @@ description: >
   deploy and get logs in DeployHub. The source for this Orb is available 
   at: https://github.com/ortelius/circleci-orb/orb/deployhub-orb.yml
 
-executor: docker/docker
-
 commands:  
   compupdate:
     description: "Update the component with git and build data"
@@ -224,7 +222,6 @@ jobs:
       appversion:
         description: "Application Version to Approve"
         type: string        
-    executor: default
     steps:
       - approve:
           dhuser: << parameters.dhuser >>
@@ -258,7 +255,6 @@ jobs:
       move_task:
         description: "'Move Task' used to move the application version to desired stage"
         type: string 
-    executor: default
     steps:
       - move:
           dhuser: << parameters.dhuser >>
@@ -292,7 +288,6 @@ jobs:
       environment:
         description: "Environment to Deploy to"
         type: string   
-    executor: default
     steps:
       - deploy:
           dhuser: << parameters.dhuser >>
@@ -357,8 +352,7 @@ jobs:
         type: string
       buildnumber:
         description: "Build Number"
-        type: string          
-    executor: default         
+        type: string                  
     steps:
       - compupdate:
           dhuser: << parameters.dhuser >>
