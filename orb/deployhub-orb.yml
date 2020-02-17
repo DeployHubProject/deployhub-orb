@@ -4,6 +4,8 @@ description: >
   deploy and get logs in DeployHub. The source for this Orb is available 
   at: https://github.com/ortelius/circleci-orb/orb/deployhub-orb.yml
 
+executor: docker/docker
+
 commands:  
   compupdate:
     description: "Update the component with git and build data"
