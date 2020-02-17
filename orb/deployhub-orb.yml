@@ -4,12 +4,6 @@ description: >
   deploy and get logs in DeployHub. The source for this Orb is available 
   at: https://github.com/ortelius/circleci-orb/orb/deployhub-orb.yml
 
-executors:
-  default:
-    description: "Ortelius image for interacting with DeployHub"
-    docker:
-      - image: quay.io/deployhub/compupdate:latest
-
 commands:  
   compupdate:
     description: "Update the component with git and build data"
@@ -72,7 +66,7 @@ commands:
       - run:
           name: Update Component
           command: >
-            /usr/local/bin/dh  
+            docker run quay.io/deployhub/compupdate:latest 
             compupdate
             --dhuser $<< parameters.dhuser >>
             --dhpass $<< parameters.dhpass >>
@@ -118,7 +112,7 @@ commands:
       - run:
           name: Approve application version
           command: >
-            /usr/local/bin/dh 
+            docker run quay.io/deployhub/compupdate:latest  
             approve
             --dhuser $<< parameters.dhuser >>
             --dhpass $<< parameters.dhpass >>
@@ -158,7 +152,7 @@ commands:
     - run:
         name: Move application along DeployHub pipeline
         command: >
-          /usr/local/bin/dh
+          docker run quay.io/deployhub/compupdate:latest 
           move
           --dhuser $<< parameters.dhuser >>
           --dhpass $<< parameters.dhpass >>
@@ -197,7 +191,7 @@ commands:
     - run:
         name: Deploy application
         command: >
-          /usr/local/bin/dh
+          docker run quay.io/deployhub/compupdate:latest 
           deploy
           --dhuser $<< parameters.dhuser >>
           --dhpass $<< parameters.dhpass >>
