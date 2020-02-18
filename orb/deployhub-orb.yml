@@ -167,7 +167,7 @@ commands:
           --appversion "<< parameters.appversion >>"
           --from_domain "<< parameters.from_domain >>"
           --task "<< parameters.move_task >>"                
-          
+
   deploy:
     description: "Deploys an Application Version to an Environment"
     parameters:
@@ -412,5 +412,5 @@ jobs:
     executor: default
     steps:
       - envscript:
-          envvars: "$<< parameters.envvars >>"
-          envvars_sh: "$<< parameters.envvars_sh >>"  
+          envvars: "<< parameters.envvars >>"
+          envvars_sh: "<< parameters.envvars_sh >>"  
