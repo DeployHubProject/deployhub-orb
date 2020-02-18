@@ -221,8 +221,8 @@ commands:
         command: >
           docker run quay.io/deployhub/compupdate:latest 
           envscript
-          --envvars "<< parameters.envvars >>"
-          --envvars_sh "<< parameters.envvars_sh >>"         
+          --envvars << parameters.envvars >>
+          --envvars_sh << parameters.envvars_sh >>         
           
 jobs:
   approvejob:
@@ -412,5 +412,5 @@ jobs:
     executor: default
     steps:
       - envscript:
-          envvars: "<< parameters.envvars >>"
-          envvars_sh: "<< parameters.envvars_sh >>"  
+          envvars: << parameters.envvars >>
+          envvars_sh: << parameters.envvars_sh >>  
