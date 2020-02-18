@@ -12,7 +12,7 @@ executors:
 
 commands:  
   microservice_version_update:
-    description: "Update the component or microservice with git and build data"
+    description: "Update the microservice or component with git and build data"
     parameters:
       dhuser:
         description: "Name of env var storing UserId to access DeployHub"
@@ -324,7 +324,7 @@ jobs:
           appversion:  << parameters.appversion >>          
           environment:  << parameters.environment >>                  
   microservice_version_update_job:
-    description: "Update the component or microservice with git and build data"
+    description: "Update the microservice or component with git and build data"
     parameters:
       dhuser:
         description: "Name of env var storing UserId to access DeployHub"
