@@ -167,44 +167,7 @@ commands:
           --appversion "<< parameters.appversion >>"
           --from_domain "<< parameters.from_domain >>"
           --task "<< parameters.move_task >>"                
-
-  deploy:
-    description: "Deploys an Application Version to an Environment"
-    parameters:
-      dhuser:
-        description: "Name of env var storing UserId to access DeployHub"
-        type: env_var_name
-        default: DH_USERID
-      dhpass:
-        description: "Name of env var storing dhpass to access DeployHub"
-        type: env_var_name
-        default: DH_PASSWORD
-      dhurl:
-        description: "Name of env var storing URL to the DeployHub Server"
-        type: env_var_name
-        default: DH_SERVERURL
-      application:
-        description: "Application Name to Deploy"
-        type: string
-      appversion:
-          description: "Application Version to Deploy"
-          type: string    
-      environment:
-        description: "Environment to Deploy to"
-        type: string             
-
-    steps:
-    - run:
-        name: Deploy application
-        command: >
-          docker run quay.io/deployhub/compupdate:latest 
-          deploy
-          --dhuser "$<< parameters.dhuser >>"
-          --dhpass "$<< parameters.dhpass >>"
-          --dhurl "$<< parameters.dhurl >>"
-          --appname "<< parameters.application >>"
-          --appversion "<< parameters.appversion >>"          
-          --env "<< parameters.environment >>"
+          
   deploy:
     description: "Deploys an Application Version to an Environment"
     parameters:
