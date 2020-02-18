@@ -1,18 +1,18 @@
 version: 2.1
 description: >
-  DeployHub Integration. This Orb provides the ability to approve, move, 
-  deploy and get logs in DeployHub. The source for this Orb is available 
+  DeployHub Integration. This Orb approves, moves, updates microservices, assigns application versions, and
+  deploys objects passing in data between the CircleCI pipeline to DeployHub. The source for this Orb is available 
   at: https://github.com/DeployHubProject/deployhub-orb/orb/deployhub-orb.yml
 
 executors:
     default:
-      description: "Ortelius image for interacting with DeployHub"
+      description: "Docker image for interacting with DeployHub"
       docker:
         - image: circlecipublic/docker-orb-test
 
 commands:  
-  compupdate:
-    description: "Update the component with git and build data"
+  microservice_version_update:
+    description: "Update the component or microservice with git and build data"
     parameters:
       dhuser:
         description: "Name of env var storing UserId to access DeployHub"
@@ -93,7 +93,7 @@ commands:
             --compattr "BuildNumber:<< parameters.buildnumber >>"
 
   approve:
-    description: "Approves an Application for the current stage of the pipeline"
+    description: "Approves an Application Version for the current stage of the pipeline"
     parameters:
       dhuser:
         description: "Name of env var storing UserId to access DeployHub"
@@ -116,7 +116,7 @@ commands:
 
     steps:
       - run:
-          name: Approve application version
+          name: Approve Application Version
           command: >
             docker run quay.io/deployhub/compupdate:latest  
             approve
@@ -127,7 +127,7 @@ commands:
             --appversion "<< parameters.appversion >>"
 
   move:
-    description: "Moves an Application from the 'from' stage of the pipeline to another stage using the move task"
+    description: "Moves an Application Version from the 'from' stage of the pipeline to another stage using the Move Task"
     parameters:
       dhuser:
         description: "Name of env var storing UserId to access DeployHub"
@@ -156,7 +156,7 @@ commands:
 
     steps:
     - run:
-        name: Move application along DeployHub pipeline
+        name: Move an Application Version through the pipeline
         command: >
           docker run quay.io/deployhub/compupdate:latest 
           move
@@ -195,7 +195,7 @@ commands:
 
     steps:
     - run:
-        name: Deploy application
+        name: Deploy Application Version
         command: >
           docker run quay.io/deployhub/compupdate:latest 
           deploy
@@ -225,7 +225,7 @@ commands:
           --envvars_sh << parameters.envvars_sh >>         
           
 jobs:
-  approvejob:
+  approve_job:
     description: "Approve an Application Version"
     parameters:
       dhuser:
@@ -254,8 +254,8 @@ jobs:
           dhurl: << parameters.dhurl >>
           application:  << parameters.application >>
           appversion:  << parameters.appversion >>
-  movejob:
-    description: "Move an Application Version"
+  move_job:
+    description: "Move an Application Version through the pipeline"
     parameters:
       dhuser:
         description: "Name of env var storing UserId to access DeployHub"
@@ -290,7 +290,7 @@ jobs:
           appversion:  << parameters.appversion >>
           from_domain:  << parameters.from_domain >>
           move_task:  << parameters.move_task >>   
-  deployjob:
+  deploy_job:
     description: "Deploy an Application Version to an Environment"
     parameters:
       dhuser:
@@ -323,8 +323,8 @@ jobs:
           application:  << parameters.application >>
           appversion:  << parameters.appversion >>          
           environment:  << parameters.environment >>                  
-  compupdate:
-    description: "Update the component with git and build data"
+  microservice_version_update_job:
+    description: "Update the component or microservice with git and build data"
     parameters:
       dhuser:
         description: "Name of env var storing UserId to access DeployHub"
@@ -382,7 +382,7 @@ jobs:
         type: string          
     executor: default         
     steps:
-      - compupdate:
+      - microservice_version_update:
           dhuser: << parameters.dhuser >>
           dhpass: << parameters.dhpass >>
           dhurl: << parameters.dhurl >>
@@ -400,7 +400,7 @@ jobs:
           gitcommit: << parameters.gitcommit >>
           buildid: << parameters.buildid >>
           buildnumber: << parameters.buildnumber >> 
-  envscriptjob:
+  envscript_job:
     description: "Generate the environment variable script from the TOML file"
     parameters:
       envvars:
