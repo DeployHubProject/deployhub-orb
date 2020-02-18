@@ -2,7 +2,7 @@ version: 2.1
 description: >
   DeployHub Integration. This Orb provides the ability to approve, move, 
   deploy and get logs in DeployHub. The source for this Orb is available 
-  at: https://github.com/ortelius/circleci-orb/orb/deployhub-orb.yml
+  at: https://github.com/DeployHubProject/deployhub-orb/orb/deployhub-orb.yml
 
 executors:
     default:
