@@ -70,7 +70,7 @@ commands:
         type: string                                      
     steps:
       - run:
-          name: Update Component
+          name: Update microservice or component
           command: >
             docker run quay.io/deployhub/compupdate:latest 
             updatecomp
