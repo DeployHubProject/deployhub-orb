@@ -228,12 +228,11 @@ commands:
     - run:
         name: Create env script
         command: |
-          # create a dummy container which will hold a volume with config
-          docker create -v /home/circleci/project --name envscript quay.io/deployhub/compupdate:latest /bin/true
-          docker cp << parameters.envvars >> envscript:/home/circleci/project/envvars.toml
-          docker cp << parameters.envvars_sh >> envscript:/home/circleci/project/bash_env.sh
-          docker run --volumes-from envscript /usr/bin/dh envscript --envvars /home/circleci/project/envvars.toml --envvars_sh /home/circleci/project/bash_env.sh
-          docker cp envscript:/home/circleci/project/bash_env.sh << parameters.envvars_sh >>        
+          docker create -v /home/circleci/project --name envscript quay.io/deployhub/compupdate:latest /bin/true;
+          docker cp << parameters.envvars >> envscript:/home/circleci/project/envvars.toml;
+          docker run --volumes-from envscript quay.io/deployhub/compupdate:latest envscript --envvars /home/circleci/project/envvars.toml --envvars_sh /home/circleci/project/bash_env.sh;
+          docker cp envscript:/home/circleci/project/bash_env.sh /tmp/bash_env.sh;
+          cat /tmp/bash_env.sh >> << parameters.envvars_sh >>;
           
 jobs:
   approve_job:
