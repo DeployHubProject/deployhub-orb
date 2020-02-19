@@ -31,7 +31,8 @@ commands:
         type: string
       appversion:
         description: "Application Version to associate the component to"
-        type: string 
+        type: string
+        default: "" 
       compname:
         description: "Component Name being updated"
         type: string
@@ -62,6 +63,12 @@ commands:
       gitcommit:
         description: "Git Commit"
         type: string
+      gitbranch:
+          description: "Git Branch"
+          type: string  
+      gittag:
+          description: "Git Tag"
+          type: string          
       buildid:
         description: "Build Url"
         type: string
@@ -85,6 +92,8 @@ commands:
             --compattr "GitCommit:<< parameters.gitcommit >>" 
             --compattr "GitUrl:<< parameters.giturl >>" 
             --compattr "GitRepo:<< parameters.gitrepo >>" 
+            --compattr "GitBranch:<< parameters.gitbranch >>"
+            --compattr "GitTag:<< parameters.gittag >>"
             --compattr "Chart:<< parameters.helmchart >>"
             --compattr "DockerSha:<< parameters.dockersha >>"
             --compattr "DockerBuildDate:<< parameters.builddate >>"
@@ -218,11 +227,13 @@ commands:
     steps:
     - run:
         name: Create env script
-        command: >
-          docker run -v /home/circleci/project:/home/circleci/project quay.io/deployhub/compupdate:latest 
-          envscript
-          --envvars << parameters.envvars >>
-          --envvars_sh << parameters.envvars_sh >>         
+        command: |
+          # create a dummy container which will hold a volume with config
+          docker create -v /home/circleci/project --name envscript quay.io/deployhub/compupdate:latest /bin/true
+          docker cp << parameters.envvars >> envscript:/home/circleci/project/envvars.toml
+          docker cp << parameters.envvars_sh >> envscript:/home/circleci/project/bash_env.sh
+          docker run --volumes-from envscript /usr/bin/dh envscript --envvars /home/circleci/project/envvars.toml --envvars_sh /home/circleci/project/bash_env.sh
+          docker cp envscript:/home/circleci/project/bash_env.sh << parameters.envvars_sh >>        
           
 jobs:
   approve_job:
@@ -374,6 +385,12 @@ jobs:
       gitcommit:
         description: "Git Commit"
         type: string
+      gitbranch:
+        description: "Git Branch"
+        type: string
+      gittag:
+        description: "Git Tag"
+        type: string    
       buildid:
         description: "Build Url"
         type: string
@@ -398,6 +415,8 @@ jobs:
           giturl: << parameters.giturl >>
           gitrepo: << parameters.gitrepo >>
           gitcommit: << parameters.gitcommit >>
+          gitbranch: << parameters.gitbranch >>
+          gittag: << parameters.gittag >>
           buildid: << parameters.buildid >>
           buildnumber: << parameters.buildnumber >> 
   envscript_job:
