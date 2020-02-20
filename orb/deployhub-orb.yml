@@ -79,7 +79,8 @@ commands:
       - run:
           name: Update microservice or component
           command: >
-            docker run quay.io/deployhub/compupdate:latest 
+            env > /tmp/env_file;
+            docker run --env-file=/tmp/env_file quay.io/deployhub/compupdate:latest 
             updatecomp
             --dhuser "$<< parameters.dhuser >>"
             --dhpass "$<< parameters.dhpass >>"
@@ -127,7 +128,8 @@ commands:
       - run:
           name: Approve Application Version
           command: >
-            docker run quay.io/deployhub/compupdate:latest  
+            env > /tmp/env_file;
+            docker run --env-file=/tmp/env_file quay.io/deployhub/compupdate:latest 
             approve
             --dhuser "$<< parameters.dhuser >>"
             --dhpass "$<< parameters.dhpass >>"
@@ -167,7 +169,8 @@ commands:
     - run:
         name: Move an Application Version through the pipeline
         command: >
-          docker run quay.io/deployhub/compupdate:latest 
+          env > /tmp/env_file;
+          docker run --env-file=/tmp/env_file quay.io/deployhub/compupdate:latest  
           move
           --dhuser "$<< parameters.dhuser >>"
           --dhpass "$<< parameters.dhpass >>"
@@ -206,7 +209,8 @@ commands:
     - run:
         name: Deploy Application Version
         command: >
-          docker run quay.io/deployhub/compupdate:latest 
+          env > /tmp/env_file;
+          docker run --env-file=/tmp/env_file quay.io/deployhub/compupdate:latest  
           deploy
           --dhuser "$<< parameters.dhuser >>"
           --dhpass "$<< parameters.dhpass >>"
