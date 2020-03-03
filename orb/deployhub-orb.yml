@@ -74,7 +74,16 @@ commands:
         type: string
       buildnumber:
         description: "Build Number"
-        type: string                                      
+        type: string 
+      customaction:
+        description: "Custom Action"
+        type: string
+      preaction:
+        description: "Pre Action"
+        type: string 
+      postaction:
+        description: "Post Action"
+        type: string                                                                   
     steps:
       - run:
           name: Update microservice or component
@@ -101,6 +110,9 @@ commands:
             --compattr "DockerRepo:<< parameters.dockerrepo >>"
             --compattr "BuildId:<< parameters.buildid >>"
             --compattr "BuildNumber:<< parameters.buildnumber >>"
+            --compattr "CustomAction:<< parameters.customaction >>"
+            --compattr "PreAction:<< parameters.preaction >>"
+            --compattr "PostAction:<< parameters.postaction >>"            
 
   approve:
     description: "Approves an Application Version for the current stage of the pipeline"
@@ -399,7 +411,16 @@ jobs:
         type: string
       buildnumber:
         description: "Build Number"
-        type: string          
+        type: string
+      customaction:
+        description: "Custom Action"
+        type: string
+      preaction:
+        description: "Pre Action"
+        type: string 
+      postaction:
+        description: "Post Action"
+        type: string                    
     executor: default         
     steps:
       - microservice_version_update:
@@ -421,7 +442,10 @@ jobs:
           gitbranch: << parameters.gitbranch >>
           gittag: << parameters.gittag >>
           buildid: << parameters.buildid >>
-          buildnumber: << parameters.buildnumber >> 
+          buildnumber: << parameters.buildnumber >>
+          customaction: << parameters.customaction >>
+          preaction: << parameters.preaction >>
+          postaction: << parameters.postaction >>
   envscript_job:
     description: "Generate the environment variable script from the TOML file"
     parameters:
