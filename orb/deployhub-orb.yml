@@ -70,8 +70,11 @@ commands:
           description: "Git Tag"
           type: string          
       buildid:
-        description: "Build Url"
+        description: "Build Id"
         type: string
+      buildurl:
+        description: "Build Url"
+        type: string  
       buildnumber:
         description: "Build Number"
         type: string 
@@ -109,6 +112,7 @@ commands:
             --compattr "DockerBuildDate:<< parameters.builddate >>"
             --compattr "DockerRepo:<< parameters.dockerrepo >>"
             --compattr "BuildId:<< parameters.buildid >>"
+            --compattr "BuildUrl:<< parameters.buildurl >>"
             --compattr "BuildNumber:<< parameters.buildnumber >>"
             --compattr "CustomAction:<< parameters.customaction >>"
             --compattr "PreAction:<< parameters.preaction >>"
@@ -407,8 +411,11 @@ jobs:
         description: "Git Tag"
         type: string    
       buildid:
-        description: "Build Url"
+        description: "Build Id"
         type: string
+      buildurl:
+        description: "Build Url"
+        type: string  
       buildnumber:
         description: "Build Number"
         type: string
@@ -442,6 +449,7 @@ jobs:
           gitbranch: << parameters.gitbranch >>
           gittag: << parameters.gittag >>
           buildid: << parameters.buildid >>
+          buildurl: << parameters.buildurl >>
           buildnumber: << parameters.buildnumber >>
           customaction: << parameters.customaction >>
           preaction: << parameters.preaction >>
