@@ -50,7 +50,10 @@ commands:
         type: string  
       dockerrepo:
         description: "docker repo from push"
-        type: string    
+        type: string
+      dockertag:
+        description: "docker tag for the image"
+        type: string                
       builddate:
         description: "Build Date"
         type: string
@@ -111,6 +114,7 @@ commands:
             --compattr "DockerSha:<< parameters.dockersha >>"
             --compattr "DockerBuildDate:<< parameters.builddate >>"
             --compattr "DockerRepo:<< parameters.dockerrepo >>"
+            --compattr "DockerTag:<< parameters.dockertag >>"
             --compattr "BuildId:<< parameters.buildid >>"
             --compattr "BuildUrl:<< parameters.buildurl >>"
             --compattr "BuildNumber:<< parameters.buildnumber >>"
@@ -391,7 +395,10 @@ jobs:
         type: string  
       dockerrepo:
         description: "docker repo from push"
-        type: string    
+        type: string  
+      dockertag:
+        description: "docker tag for the image"
+        type: string        
       builddate:
         description: "Build Date"
         type: string
@@ -443,6 +450,7 @@ jobs:
           dockersha: << parameters.dockersha >>
           builddate: << parameters.builddate >>
           dockerrepo: << parameters.dockerrepo >>
+          dockertag: << parameters.dockertag >>          
           giturl: << parameters.giturl >>
           gitrepo: << parameters.gitrepo >>
           gitcommit: << parameters.gitcommit >>
