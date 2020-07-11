@@ -102,6 +102,7 @@ commands:
             --dhurl "$<< parameters.dhurl >>"
             --appname "<< parameters.application >>"
             --appversion "<< parameters.appversion >>"
+            --appautoinc "Y"
             --compname "<< parameters.compname >>"
             --compversion "<< parameters.compversion >>"
             << parameters.comptype >>
