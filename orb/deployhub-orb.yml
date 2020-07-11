@@ -1,8 +1,11 @@
 version: 2.1
 description: >
   DeployHub Integration. This Orb approves, moves, updates microservices, assigns application versions, and
-  deploys objects passing in data between the CircleCI pipeline to DeployHub. The source for this Orb is available 
-  at: https://github.com/DeployHubProject/deployhub-orb/orb/deployhub-orb.yml
+  deploys objects passing in data between the CircleCI pipeline to DeployHub.
+
+display:
+  home_url: https://www.deployhub.com/
+  source_url: https://github.com/DeployHubProject/deployhub-orb
 
 executors:
     default:
