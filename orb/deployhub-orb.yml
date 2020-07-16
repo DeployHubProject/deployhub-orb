@@ -241,7 +241,7 @@ commands:
           --dhurl "$<< parameters.dhurl >>"
           --appname "<< parameters.application >>"
           --appversion "<< parameters.appversion >>"          
-          --env "<< parameters.environment >>"
+          --deployenv "<< parameters.environment >>"
 
   envscript:
     description: "Generate the environment variable script from the TOML file"
