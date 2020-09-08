@@ -243,6 +243,37 @@ commands:
           --appversion "<< parameters.appversion >>"          
           --deployenv "<< parameters.environment >>"
 
+  deploy-component:
+    description: "Deploys an Application Version to an Environment based on a Component"
+    parameters:
+      dhuser:
+        description: "Name of env var storing UserId to access DeployHub"
+        type: env_var_name
+        default: DH_USERID
+      dhpass:
+        description: "Name of env var storing dhpass to access DeployHub"
+        type: env_var_name
+        default: DH_PASSWORD
+      dhurl:
+        description: "Name of env var storing URL to the DeployHub Server"
+        type: env_var_name
+        default: DH_SERVERURL
+      component:
+        description: "Component Name to Deploy"
+        type: string            
+
+    steps:
+    - run:
+        name: Deploy Application Version base on a Component
+        command: >
+          env > /tmp/env_file;
+          docker run --env-file=/tmp/env_file quay.io/deployhub/compupdate:latest  
+          deploy
+          --dhuser "$<< parameters.dhuser >>"
+          --dhpass "$<< parameters.dhpass >>"
+          --dhurl "$<< parameters.dhurl >>"
+          --compname "<< parameters.application >>"
+
   envscript:
     description: "Generate the environment variable script from the TOML file"
     parameters:
