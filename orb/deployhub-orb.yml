@@ -258,10 +258,12 @@ commands:
         description: "Name of env var storing URL to the DeployHub Server"
         type: env_var_name
         default: DH_SERVERURL
-      component:
-        description: "Component Name to Deploy"
-        type: string            
-
+      compname:
+        description: "Component Name being deployed"
+        type: string
+      compversion:
+        description: "Component Version being deployed"
+        type: string          
     steps:
     - run:
         name: Deploy Application Version base on a Component
@@ -272,7 +274,8 @@ commands:
           --dhuser "$<< parameters.dhuser >>"
           --dhpass "$<< parameters.dhpass >>"
           --dhurl "$<< parameters.dhurl >>"
-          --compname "<< parameters.component >>"
+          --compname "<< parameters.compname >>"
+          --compversion "<< parameters.compversion >>"
 
   envscript:
     description: "Generate the environment variable script from the TOML file"
@@ -407,16 +410,20 @@ jobs:
         description: "Name of env var storing URL to the DeployHub Server"
         type: env_var_name
         default: DH_SERVERURL
-      component:
-        description: "Component Name to Deploy"
+      compname:
+        description: "Component Name being deployed"
         type: string
+      compversion:
+        description: "Component Version being deployed"
+        type: string 
     executor: default
     steps:
       - deploy_component:
           dhuser: << parameters.dhuser >>
           dhpass: << parameters.dhpass >>
           dhurl: << parameters.dhurl >>
-          component:  << parameters.component >>                        
+          compname:  << parameters.compname >>  
+          compversion:  << parameters.compversion >>                        
   microservice_version_update_job:
     description: "Update the microservice or component with git and build data"
     parameters:
