@@ -272,7 +272,7 @@ commands:
           --dhuser "$<< parameters.dhuser >>"
           --dhpass "$<< parameters.dhpass >>"
           --dhurl "$<< parameters.dhurl >>"
-          --compname "<< parameters.application >>"
+          --compname "<< parameters.component >>"
 
   envscript:
     description: "Generate the environment variable script from the TOML file"
@@ -391,7 +391,32 @@ jobs:
           dhurl: << parameters.dhurl >>
           application:  << parameters.application >>
           appversion:  << parameters.appversion >>          
-          environment:  << parameters.environment >>                  
+          environment:  << parameters.environment >>     
+  deploy_component_job:
+    description: "Deploy an Application Version to an Environment based on a Component"
+    parameters:
+      dhuser:
+        description: "Name of env var storing UserId to access DeployHub"
+        type: env_var_name
+        default: DH_USERID
+      dhpass:
+        description: "Name of env var storing dhpass to access DeployHub"
+        type: env_var_name
+        default: DH_PASSWORD
+      dhurl:
+        description: "Name of env var storing URL to the DeployHub Server"
+        type: env_var_name
+        default: DH_SERVERURL
+      component:
+        description: "Component Name to Deploy"
+        type: string
+    executor: default
+    steps:
+      - deploy:
+          dhuser: << parameters.dhuser >>
+          dhpass: << parameters.dhpass >>
+          dhurl: << parameters.dhurl >>
+          component:  << parameters.component >>                        
   microservice_version_update_job:
     description: "Update the microservice or component with git and build data"
     parameters:
