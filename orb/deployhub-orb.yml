@@ -53,15 +53,15 @@ commands:
         default: COMPONENT_CHARTNAME
       registry:
         description: "Docker Registry Name"
-        type: string
+        type: env_var_name
         default: DOCKER_REGISTRY
       image:
         description: "Image Name"
-        type: string
+        type: env_var_name
         default: COMPONENT_IMAGENAME
       tag:
         description: "Image Tag"
-        type: string
+        type: env_var_name
         default: IMAGE_TAG
       imagesha:
         description: "sha of the container"
@@ -69,7 +69,7 @@ commands:
         default: $(</tmp/digest.txt)
       customaction:
         description: "Custom Action"
-        type: env_var_name
+        type: string
         default: "GLOBAL.HelmChart"                                                            
     steps:
       - run:
@@ -439,15 +439,15 @@ jobs:
         default: COMPONENT_CHARTNAME
       registry:
         description: "Docker Registry Name"
-        type: string
+        type: env_var_name
         default: DOCKER_REGISTRY
       image:
         description: "Image Name"
-        type: string
+        type: env_var_name
         default: COMPONENT_IMAGENAME
       tag:
         description: "Image Tag"
-        type: string
+        type: env_var_name
         default: IMAGE_TAG
       imagesha:
         description: "sha of the container"
@@ -455,8 +455,8 @@ jobs:
         default: $(</tmp/digest.txt)
       customaction:
         description: "Custom Action"
-        type: env_var_name
-        default: "GLOBAL.HelmChart"                    
+        type: string
+        default: "GLOBAL.HelmChart"                  
     executor: default         
     steps:
       - microservice_version_update:
