@@ -49,20 +49,20 @@ commands:
         default: "--docker"  
       helmchart:
         description: "Helm Chart Name"
-        type: env_var_name
-        default: COMPONENT_CHARTNAME
+        type: string
+        default: $COMPONENT_CHARTNAME
       registry:
         description: "Docker Registry Name"
-        type: env_var_name
-        default: DOCKER_REGISTRY
+        type: string
+        default: $DOCKER_REGISTRY
       image:
         description: "Image Name"
-        type: env_var_name
-        default: COMPONENT_IMAGENAME
+        type: string
+        default: $COMPONENT_IMAGENAME
       tag:
         description: "Image Tag"
-        type: env_var_name
-        default: IMAGE_TAG
+        type: string
+        default: $IMAGE_TAG
       imagesha:
         description: "sha of the container"
         type: string 
@@ -70,7 +70,7 @@ commands:
       customaction:
         description: "Custom Action"
         type: string
-        default: "GLOBAL.HelmChart"                                                            
+        default: "GLOBAL.HelmChart"                                                          
     steps:
       - run:
           name: Update microservice or component
